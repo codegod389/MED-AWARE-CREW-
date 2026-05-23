@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedAware Crew · health awareness · 1st Anniversary</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Inter (modern, 2026 vibe) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      color: #1a1e24;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      background-color: #fafcff;
+    }
+
+    /* background layer image (soft overlay) */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('https://i.ibb.co/6cnR7P2G/IMG-20260126-215947.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      opacity: 0.08;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* color palette */
+    :root {
+      --blue: #0a5c9e;
+      --blue-light: #e1f0fa;
+      --black: #121417;
+      --ash: #f2f4f8;
+      --ash-medium: #e9ecf2;
+      --white: #ffffff;
+      --gray-text: #2f3a47;
+      --gold: #d4af37;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* header / nav */
+    .site-header {
+      background-color: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,40,80,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .logo span:first-child {
+      color: var(--blue);
+    }
+    .logo span:last-child {
+      color: var(--black);
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-menu a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--gray-text);
+      transition: 0.2s;
+      font-size: 0.95rem;
+    }
+    .nav-menu a:hover {
+      color: var(--blue);
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--blue);
+    }
+
+    /* sections */
+    section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid rgba(233, 236, 242, 0.6);
+      background-color: rgba(255,255,255,0.4);
+      backdrop-filter: blur(2px);
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      position: relative;
+      display: inline-block;
+      letter-spacing: -0.01em;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--blue);
+      border-radius: 4px;
+    }
+
+    .bg-ash {
+      background-color: rgba(242, 244, 248, 0.7);
+      backdrop-filter: blur(2px);
+    }
+
+    /* grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.8rem;
+    }
+
+    /* member cards */
+    .member-card {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 2rem 1.5rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.02), 0 4px 10px rgba(0,50,90,0.05);
+      transition: 0.15s ease;
+      border: 1px solid rgba(10,92,158,0.1);
+    }
+    .member-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px rgba(10,92,158,0.15);
+      border-color: rgba(10,92,158,0.3);
+    }
+
+    .member-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 1.2rem;
+      overflow: hidden;
+      border: 3px solid white;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      background: linear-gradient(145deg, var(--blue-light), #d4e7f5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .member-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .member-avatar i {
+      font-size: 3.5rem;
+      color: var(--blue);
+      opacity: 0.7;
+    }
+
+    .member-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--black);
+    }
+    .member-title {
+      color: var(--blue);
+      font-weight: 500;
+      margin-top: 0.3rem;
+      font-size: 0.95rem;
+    }
+
+    /* anniversary special section */
+    .anniversary-section {
+      background: linear-gradient(135deg, rgba(10,92,158,0.1), rgba(212,175,55,0.1));
+      backdrop-filter: blur(4px);
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      padding: 3rem 0;
+      margin: 2rem 0;
+    }
+    .anniversary-card {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.85);
+      border-radius: 4rem;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 25px 40px rgba(0,0,0,0.1);
+      border: 1px solid var(--gold);
+    }
+    .anniversary-card i {
+      font-size: 3.5rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .anniversary-card h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--blue), var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+    .anniversary-card p {
+      font-size: 1.2rem;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+    .anniversary-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+    .stat {
+      background: var(--white);
+      border-radius: 2rem;
+      padding: 1rem 2rem;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--blue);
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--gray-text);
+    }
+
+    /* video card */
+    .video-card {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(4px);
+      border-radius: 1.8rem;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.02);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+    .video-embed {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+    .video-embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .video-info {
+      padding: 1rem 1.2rem 1.2rem;
+    }
+    .video-info h4 {
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      font-size: 1rem;
+    }
+    .video-info p {
+      color: var(--gray-text);
+      font-size: 0.85rem;
+    }
+
+    /* partner badges */
+    .partner-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    .partner-item {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(2px);
+      border: 1px solid var(--ash-medium);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      color: var(--blue);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .partner-note {
+      background: rgba(225, 240, 250, 0.8);
+      backdrop-filter: blur(2px);
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      margin-top: 1.8rem;
+      color: var(--blue);
+      font-weight: 500;
+      border: 1px solid var(--blue);
+    }
+
+    /* location & phone */
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(4px);
+      padding: 2.5rem;
+      border-radius: 3rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+    }
+    .info-icon {
+      font-size: 2rem;
+      color: var(--blue);
+      margin-right: 1rem;
+    }
+    .info-block {
+      display: flex;
+      align-items: center;
+    }
+    .info-block p {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    /* social */
+    .social-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
+      margin: 2rem 0 1rem;
+    }
+    .social-link {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(4px);
+      padding: 0.9rem 1.8rem;
+      border-radius: 60px;
+      border: 1px solid var(--ash-medium);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--black);
+      text-decoration: none;
+      transition: 0.15s;
+    }
+    .social-link i {
+      color: var(--blue);
+      font-size: 1.4rem;
+    }
+    .social-link:hover {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: white;
+    }
+    .social-link:hover i {
+      color: white;
+    }
+
+    /* ceo speech */
+    .speech-card {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(4px);
+      padding: 2.8rem 3rem;
+      border-radius: 3rem;
+      box-shadow: 0 25px 40px -15px rgba(10,92,158,0.15);
+      border: 1px solid rgba(10,92,158,0.1);
+      font-size: 1.25rem;
+      font-style: normal;
+      position: relative;
+    }
+    .speech-card::before {
+      content: "“";
+      font-size: 6rem;
+      color: var(--blue-light);
+      position: absolute;
+      top: -0.2rem;
+      left: 1.5rem;
+      opacity: 0.5;
+      font-family: serif;
+    }
+    .speech-author {
+      margin-top: 1.5rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    footer {
+      background: rgba(18, 20, 23, 0.9);
+      backdrop-filter: blur(2px);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    /* responsive */
+    @media (max-width: 1024px) {
+      .grid-4 { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 880px) {
+      .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .grid-2 { grid-template-columns: 1fr; }
+      .header-inner { padding: 1rem; }
+    }
+    @media (max-width: 680px) {
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        gap: 1rem;
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(10px);
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 2rem;
+        box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+      }
+      .nav-menu.active { display: flex; }
+      .hamburger { display: block; }
+      .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .section-title { font-size: 1.9rem; }
+      .info-row { flex-direction: column; gap: 1.5rem; }
+      .social-link { width: 100%; justify-content: center; }
+      .anniversary-card { padding: 1.5rem; }
+      .anniversary-stats { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span>Med</span><span>Aware</span>
+      </div>
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#bio">Bio</a></li>
+          <li><a href="#accomplishment">Accomplishment</a></li>
+          <li><a href="#vision">Vision</a></li>
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="#how-started">How it started</a></li>
+          <li><a href="#partners">Partners</a></li>
+          <li><a href="#members">Members</a></li>
+          <li><a href="#anniversary">Anniversary</a></li>
+          <li><a href="#videos">Videos</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#ceo">CEO speech</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- BIO section -->
+    <section id="bio">
+      <div class="container">
+        <h2 class="section-title">Bio</h2>
+        <p style="font-size: 1.3rem; max-width: 900px; background: rgba(242,244,248,0.7); backdrop-filter: blur(4px); padding: 2rem; border-radius: 3rem;">MedAware Crew is a student-led health awareness initiative dedicated to educating communities, empowering young people, and promoting preventive health practices. Built on passion, service, and creativity, the Crew uses storytelling, digital content, outreach programs, and medical knowledge to make health education accessible to all.</p>
+      </div>
+    </section>
+
+    <!-- ACCOMPLISHMENT -->
+    <section id="accomplishment" class="bg-ash">
+      <div class="container">
+        <h2 class="section-title">Accomplishment</h2>
+        <ul style="list-style: none; display: grid; gap: 1.5rem; font-size: 1.2rem;">
+          <li><i class="fas fa-check-circle" style="color: var(--blue); margin-right: 1rem;"></i> Reached hundreds of students across campuses through health education content.</li>
+          <li><i class="fas fa-check-circle" style="color: var(--blue); margin-right: 1rem;"></i> Built a growing online community focused on preventive health and wellness.</li>
+          <li><i class="fas fa-check-circle" style="color: var(--blue); margin-right: 1rem;"></i> Produced engaging videos, campaigns, and on-site awareness programs.</li>
+          <li><i class="fas fa-check-circle" style="color: var(--blue); margin-right: 1rem;"></i> Collaborated with student bodies and campus organizations to run health-based events.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- VISION + MISSION -->
+    <section id="vision-mission">
+      <div class="container grid-2">
+        <div id="vision">
+          <h2 class="section-title" style="margin-bottom: 1.8rem;">Vision</h2>
+          <p style="background: rgba(242,244,248,0.7); backdrop-filter: blur(4px); padding: 2rem; border-radius: 2.5rem;">To become a leading youth-powered health awareness platform in Africa, transforming communities through education, empowerment, and accessible preventive health information.</p>
+        </div>
+        <div id="mission">
+          <h2 class="section-title" style="margin-bottom: 1.8rem;">Mission</h2>
+          <ul style="background: rgba(242,244,248,0.7); backdrop-filter: blur(4px); padding: 2rem; border-radius: 2.5rem; list-style: none;">
+            <li>✓ Provide clear, relatable, evidence-based health education.</li>
+            <li>✓ Promote preventive medicine and early awareness.</li>
+            <li>✓ Build a community that values wellness & informed decisions.</li>
+            <li>✓ Train and inspire young volunteers in public health advocacy.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT STARTED -->
+    <section id="how-started" class="bg-ash">
+      <div class="container">
+        <h2 class="section-title">How it started</h2>
+        <div style="background: rgba(255,255,255,0.7); backdrop-filter: blur(4px); padding: 2.5rem; border-radius: 3rem; max-width: 900px;">MedAware Crew began as a simple idea — a desire to help students and people live healthier, make better decisions, and access medical knowledge in a way that is simple, engaging, and fun. Founded by a passionate medical student, MedAware Crew started with short videos and campus-level health talks. Over time, it grew into a structured platform with a team, vision, and a mission to impact thousands.</div>
+      </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section id="partners">
+      <div class="container">
+        <h2 class="section-title">Partner organisations</h2>
+        <div class="partner-list">
+          <span class="partner-item">Faculty-level student associations</span>
+          <span class="partner-item">Departmental bodies</span>
+          <span class="partner-item">Event committees</span>
+          <span class="partner-item">Campus wellness groups</span>
+          <span class="partner-item">Student media & content groups</span>
+        </div>
+        <div class="partner-note"><i class="fas fa-handshake" style="margin-right: 0.8rem;"></i> e.g., MedAware Crew partnered with NiMSA TOMHCN on a Breast Cancer Awareness outreach</div>
+      </div>
+    </section>
+
+    <!-- MEMBERS (rearranged: Sophia first, then others) -->
+    <section id="members" class="bg-ash">
+      <div class="container">
+        <h2 class="section-title">Our Crew</h2>
+        <div class="grid-3">
+          <!-- 1. Sophia - President -->
+          <div class="member-card">
+            <div class="member-avatar"><img src="https://i.ibb.co/KjV00vx2/IMG-20260126-215710.jpg" alt="Sophia"></div>
+            <div class="member-name">Sophia</div>
+            <div class="member-title">President</div>
+          </div>
+          <!-- 2. Clara - Actress/Ambassador -->
+          <div class="member-card">
+            <div class="member-avatar"><img src="https://i.ibb.co/67Kj6gNn/IMG-20260126-221400.jpg" alt="Clara"></div>
+            <div class="member-name">Clara</div>
+            <div class="member-title">Actress/Ambassador</div>
+          </div>
+          <!-- 3. Xayne - Lead script writer -->
+          <div class="member-card">
+            <div class="member-avatar"><img src="https://i.ibb.co/hxHWp84q/IMG-20260126-220545.jpg" alt="Xayne"></div>
+            <div class="member-name">Xayne</div>
+            <div class="member-title">Lead script writer</div>
+          </div>
+          <!-- 4. Precious - Assistant script writer -->
+          <div class="member-card">
+            <div class="member-avatar"><img src="https://i.ibb.co/27VrZmbX/IMG-20260126-221505.jpg" alt="Precious"></div>
+            <div class="member-name">Precious</div>
+            <div class="member-title">Assistant script writer</div>
+          </div>
+          <!-- 5. Reward - Photographer/videographer -->
+          <div class="member-card">
+            <div class="member-avatar"><img src="https://i.ibb.co/whbs8b8r/IMG-20260126-220349.jpg" alt="Reward"></div>
+            <div class="member-name">Reward</div>
+            <div class="member-title">Photographer/videographer</div>
+          </div>
+          <!-- 6. Mary - Secretary -->
+          <div class="member-card">
+            <div class="member-avatar"><img src="https://i.ibb.co/TMYzY6jw/IMG-20260126-221609.jpg" alt="Mary"></div>
+            <div class="member-name">Mary</div>
+            <div class="member-title">Secretary</div>
+          </div>
+          <!-- 7. Sixtus - Actor/Ambassador -->
+          <div class="member-card">
+            <div class="member-avatar"><img src="https://i.ibb.co/N200X53K/IMG-20260126-221016.jpg" alt="Sixtus"></div>
+            <div class="member-name">Sixtus</div>
+            <div class="member-title">Actor/Ambassador</div>
+          </div>
+          <!-- 8. Miracle - social media manager (no picture) -->
+          <div class="member-card">
+            <div class="member-avatar"><i class="fas fa-user-circle"></i></div>
+            <div class="member-name">Miracle</div>
+            <div class="member-title">social media manager</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🎉 FIRST ANNIVERSARY SPECIAL SECTION (added) -->
+    <div id="anniversary" class="anniversary-section">
+      <div class="container">
+        <div class="anniversary-card">
+          <i class="fas fa-birthday-cake"></i>
+          <h2>🎂 1st Anniversary Celebration 🎉</h2>
+          <p><strong>MedAware Crew turns ONE!</strong> A full year of spreading health awareness, impacting lives, and growing together. Thank you to every supporter, volunteer, and partner who made this journey unforgettable.</p>
+          <div class="anniversary-stats">
+            <div class="stat"><div class="stat-number">1000+</div><div class="stat-label">Students reached</div></div>
+            <div class="stat"><div class="stat-number">12+</div><div class="stat-label">Campuses engaged</div></div>
+            <div class="stat"><div class="stat-number">6+</div><div class="stat-label">Community outreaches</div></div>
+            <div class="stat"><div class="stat-number">∞</div><div class="stat-label">Passion & dedication</div></div>
+          </div>
+          <p style="font-size: 1rem; font-style: italic; color: var(--blue);">“One year of impact, many more to come. Here’s to healthier communities!” — Sophia & the entire MedAware Crew</p>
+          <div style="margin-top: 1.5rem;">
+            <span style="background: var(--blue); color: white; padding: 0.5rem 1.2rem; border-radius: 40px; display: inline-block;"><i class="fas fa-heart"></i> Thank you for 1 amazing year</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEOS section -->
+    <section id="videos">
+      <div class="container">
+        <h2 class="section-title">Recent videos</h2>
+        <div class="grid-4">
+          <div class="video-card"><div class="video-embed"><iframe src="https://www.youtube.com/embed/YxHm3yIQKpo" allowfullscreen></iframe></div><div class="video-info"><h4>Instant noodles: Convenient but Harmful 🤔?</h4><p>MedAware Crew</p></div></div>
+          <div class="video-card"><div class="video-embed"><iframe src="https://www.youtube.com/embed/ZIScuXMuwhU" allowfullscreen></iframe></div><div class="video-info"><h4>Health Awareness Short</h4><p>MedAware Crew</p></div></div>
+          <div class="video-card"><div class="video-embed"><iframe src="https://www.youtube.com/embed/MKvsQwhv6SU" allowfullscreen></iframe></div><div class="video-info"><h4>Preventive Health Talk</h4><p>MedAware Crew</p></div></div>
+          <div class="video-card"><div class="video-embed"><iframe src="https://www.youtube.com/embed/5hgsCNutkNc" allowfullscreen></iframe></div><div class="video-info"><h4>Campus Outreach</h4><p>MedAware Crew</p></div></div>
+          <div class="video-card"><div class="video-embed"><iframe src="https://www.youtube.com/embed/Qodv4rvbFcw" allowfullscreen></iframe></div><div class="video-info"><h4>Student Health Dialogue</h4><p>MedAware Crew</p></div></div>
+          <div class="video-card"><div class="video-embed"><iframe src="https://www.youtube.com/embed/riDjOGhIeZ0" allowfullscreen></iframe></div><div class="video-info"><h4>Wellness & You</h4><p>MedAware Crew</p></div></div>
+        </div>
+        <p style="margin-top: 2rem"><i class="fab fa-youtube" style="color: var(--blue);"></i> Watch all videos on our <a href="https://youtube.com/@medawarecrew" target="_blank" style="color: var(--blue);">YouTube channel</a>.</p>
+      </div>
+    </section>
+
+    <!-- LOCATION & PHONE -->
+    <section id="location" class="bg-ash">
+      <div class="container">
+        <h2 class="section-title">Location & contact</h2>
+        <div class="info-row">
+          <div class="info-block"><i class="fas fa-map-pin info-icon"></i><p><strong>Based in Nigeria</strong><br>Anambra State & surrounding university communities</p></div>
+          <div class="info-block"><i class="fas fa-phone-alt info-icon"></i><p><strong><a href="tel:07039924244" style="text-decoration: none; color: inherit;">07039924244</a></strong><br>call / WhatsApp</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CEO SPEECH -->
+    <section id="ceo">
+      <div class="container">
+        <h2 class="section-title">CEO speech</h2>
+        <div class="speech-card">
+          “MedAware Crew was created from a place of passion and responsibility — a belief that young people deserve proper health information presented in a way they can understand and apply. Every day, we see how simple awareness can save lives. MedAware Crew is more than a platform; it is a movement to build healthier students, healthier communities, and healthier futures. Our mission is to educate, empower, and inspire — one conversation, one video, one outreach at a time. Thank you for believing in our vision. This is only the beginning.”
+          <div class="speech-author">— Sophia (Founder, MedAware Crew)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL MEDIA -->
+    <section id="social" class="bg-ash">
+      <div class="container" style="text-align: center;">
+        <h2 class="section-title" style="display: inline-block; margin-bottom: 2rem;">Follow us on our socials</h2>
+        <p style="margin-bottom: 2.2rem; font-size: 1.2rem;">be up to date with all our activities</p>
+        <div class="social-grid">
+          <a href="https://youtube.com/@medawarecrew?si=gPkN6zU9Z3g7zCuA" target="_blank" class="social-link"><i class="fab fa-youtube"></i> YouTube</a>
+          <a href="https://www.tiktok.com/@medaware.crew?_t=ZM-8wi6Id9E44z&_r=1" target="_blank" class="social-link"><i class="fab fa-tiktok"></i> TikTok</a>
+          <a href="https://www.linkedin.com/in/sophia-jane-a65b99343?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="social-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="https://x.com/med_aware_crew?s=11" target="_blank" class="social-link"><i class="fab fa-x-twitter"></i> X</a>
+          <a href="https://www.instagram.com/med_aware_crew?igsh=eHp1eTF0NjBwOXVn&utm_source=qr" target="_blank" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="#" target="_blank" class="social-link"><i class="fab fa-facebook"></i> Facebook</a>
+        </div>
+        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; color: var(--gray-text);">
+          <span><i class="fab fa-youtube" style="color: var(--blue);"></i> @medawarecrew</span>
+          <span><i class="fab fa-tiktok"></i> @medaware.crew</span>
+          <span><i class="fab fa-instagram"></i> @med_aware_crew</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p style="opacity: 0.9;">© 2026 MedAware Crew — student-led health initiative | Celebrating 1 year of impact ✨</p>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', function() { navMenu.classList.toggle('active'); });
+    document.querySelectorAll('.nav-menu a').forEach(link => { link.addEventListener('click', (e) => { navMenu.classList.remove('active'); }); });
+  </script>
+</body>
+</html>
